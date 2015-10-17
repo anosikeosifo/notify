@@ -132,7 +132,7 @@ NotificationManager.prototype.sendSubscriptionToServer = function(subscription) 
   console.log("registrationID");
   console.log(registrationID);
 
-  fetch("https://fkglrlxxqs.localtunnel.me/notifications/register",
+  fetch("https://web-notify.herokuapp.com//notifications/register",
   {
       method: "POST",
       body: data
