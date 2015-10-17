@@ -1,5 +1,6 @@
-SubscriptionsController < ApplicationController
+SubscribersController < ApplicationController
   before_action :get_registration_id, only: [:register]
+
   def register
     begin
       subscriber = Subscriber.where(registration_id: @registation_id).first_or_create do |subscriber|

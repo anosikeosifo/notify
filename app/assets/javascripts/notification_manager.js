@@ -124,12 +124,12 @@ NotificationManager.prototype.sendSubscriptionToServer = function(subscription) 
   var registrationID = this.getRegistrationID(subscription.endpoint);
 
   var data = new FormData();
-
   data.append( "register_id", JSON.stringify( registrationID ) );
 
   console.log("registrationID");
   console.log(registrationID);
 
+  //Please replace this with your https endpoint, as this has been taken down
   fetch("https://web-notify.herokuapp.com/subscribers/register",
   {
       method: "POST",
@@ -143,6 +143,6 @@ NotificationManager.prototype.getRegistrationID = function(subscriptionEndpoint)
   return subscriptionEndpoint.split('/').pop();
 }
 
-$(function(){
+document.addEventListener("DOMContentLoaded", function(event) {
   new NotificationManager();
 });
