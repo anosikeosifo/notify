@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @notification.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @notification.body %>
+</p>
+
+<p>
+  <strong>Link:</strong>
+  <%= @notification.link %>
+</p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= @notification.image %>
+</p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= asset_path(@notification.image(:thumb)) %>
+</p>
+
+
+<%= link_to 'Edit', edit_notification_path(@notification) %> |
+<%= link_to 'Back', notifications_path %>
