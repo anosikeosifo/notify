@@ -18,7 +18,7 @@ self.addEventListener('push', function(event) {
 
   event.waitUntil (
 
-    fetch('https://sejybogeau.localtunnel.me/notifications/most_recent.json').then(function(response) {
+    fetch('https://web-notify.herokuapp.com/notifications/most_recent.json').then(function(response) {
       console.log(response)
       if (response.status !== 200) {
         console.log("something has gone wrong while trying to fetch data for the notification, Status: " + response.status)
