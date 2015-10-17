@@ -2,7 +2,7 @@
 
 <h1>Listing Notifications</h1>
 
-<%= if @notifications.any? %>
+<% if @notifications.any? %>
   <%= button_to "Send Notification",  notify_notifications_path, data: { confirm: "You sure you want send notification" }, class: 'btn btn-danger' %>
 <% end %>
 
