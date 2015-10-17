@@ -1,7 +1,5 @@
 class NotificationsController < ApplicationController
   before_action :set_notification, only: [:show, :edit, :update, :destroy]
-  before_action :get_registration_id, only: :register
-
   # GET /notifications
   # GET /notifications.json
   def index
@@ -23,6 +21,7 @@ class NotificationsController < ApplicationController
     @notification = Notification.new(notification_params)
     @notification.url_host = request.host
 
+
     respond_to do |format|
       if @notification.save
         format.html { redirect_to @notification, notice: 'Notification was successfully created.' }
@@ -31,17 +30,6 @@ class NotificationsController < ApplicationController
         format.html { render :new }
         format.json { render json: @notification.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  def register
-    begin
-      subscriber = Subscriber.where(registration_id: @registation_id).first_or_create do |subscriber|
-        subscriber.registration_id = @registation_id
-      end
-      render json: subscriber, status: 200
-    rescue
-      render json: subscriber.errors.full_messages.to_sentence, status: :unprocessable_entity
     end
   end
 
@@ -89,9 +77,5 @@ class NotificationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def notification_params
       params.require(:notification).permit(:title, :body, :link, :image, :image_url)
-    end
-
-    def get_registration_id
-      @registation_id = params[:register_id]
     end
 end

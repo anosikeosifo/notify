@@ -130,7 +130,7 @@ NotificationManager.prototype.sendSubscriptionToServer = function(subscription) 
   console.log("registrationID");
   console.log(registrationID);
 
-  fetch("https://web-notify.herokuapp.com/notifications/register",
+  fetch("https://web-notify.herokuapp.com/subscribers/register",
   {
       method: "POST",
       body: data
