@@ -33,7 +33,7 @@ self.addEventListener('push', function(event) {
         console.log(responseData);
         var title = responseData.title;
         var body = responseData.body;
-        var icon = responseData.image;
+        var icon = responseData.image_url;
 
         self.registration.showNotification(title, {
           body: body,
