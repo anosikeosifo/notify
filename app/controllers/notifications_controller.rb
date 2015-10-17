@@ -74,9 +74,10 @@ class NotificationsController < ApplicationController
   end
 
 
-  def  notify
-    recipients = Subscribers.pluck(:registration_id)
-    GcmPush.send(recipients)
+  def notify
+    recipients = Subscriber.pluck(:registration_id)
+    response = GcmPush.send(recipients)
+    redirect_to notifications_url, notice: "#{ response }"
   end
 
   private
