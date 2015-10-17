@@ -35,7 +35,14 @@ class NotificationsController < ApplicationController
   end
 
   def register
+    subscriber = Subscriber.new
+    subscriber.registration_id = @registation_id
 
+    if subscriber.save
+      render json: subscriber, status: 200
+    else
+      render json: subscriber.errors.full_messages.to_sentence, status: :unprocessable_entity
+    end
   end
 
   # PATCH/PUT /notifications/1
@@ -78,6 +85,6 @@ class NotificationsController < ApplicationController
     end
 
     def get_registration_id
-
+      @registation_id = params[:register_id]
     end
 end
