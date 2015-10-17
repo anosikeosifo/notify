@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :notifications, except: [:destroy] do
     get :most_recent, on: :collection, format: 'json'
+    post :register, on: :collection, format: 'json'
   end
 
   root 'notifications#index'

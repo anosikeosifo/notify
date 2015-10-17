@@ -1,5 +1,6 @@
 class NotificationsController < ApplicationController
   before_action :set_notification, only: [:show, :edit, :update, :destroy]
+  before_action :get_registration_id, only: :register
 
   # GET /notifications
   # GET /notifications.json
@@ -74,5 +75,9 @@ class NotificationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def notification_params
       params.require(:notification).permit(:title, :body, :link, :image, :image_url)
+    end
+
+    def get_registration_id
+
     end
 end

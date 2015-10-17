@@ -64,9 +64,7 @@ NotificationManager.prototype.subscribe = function(){
 
         currentEndpoint = pushSubscription.endpoint;
         console.log("Subscribed endpoint: " + currentEndpoint);
-        this.sendSubscriptionToServer(pushSubscription);
-
-        return;
+        return sendSubscriptionToServer(pushSubscription);
       })
       .catch(function(e){
         if(Notification.permission === 'denied') {
@@ -141,13 +139,10 @@ NotificationManager.prototype.sendSubscriptionToServer = function(subscription) 
   .then(function(data){ console.log( JSON.stringify( data ) ) })
 }
 
-NotificationManager.prototype.getRegistrationID = function(subscription) {
-  var registrationID = subscription.split('/').pop();
-  console.log(registrationID);
+NotificationManager.prototype.getRegistrationID = function(subscriptionEndpoint) {
+  return subscriptionEndpoint.split('/').pop();
 }
 
 $(function(){
-  //var subscribeButton = $('#subscribe')
-  //new NotificationManager(subscribeButton);
   new NotificationManager();
 });
