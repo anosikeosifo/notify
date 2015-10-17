@@ -21,8 +21,8 @@ class NotificationsController < ApplicationController
   # POST /notifications.json
   def create
     @notification = Notification.new(notification_params)
-
     @notification.url_host = request.host
+
     respond_to do |format|
       if @notification.save
         format.html { redirect_to @notification, notice: 'Notification was successfully created.' }
@@ -35,12 +35,12 @@ class NotificationsController < ApplicationController
   end
 
   def register
-    subscriber = Subscriber.new
-    subscriber.registration_id = @registation_id
-
-    if subscriber.save
+    begin
+      subscriber = Subscriber.where(registration_id: @registation_id).first_or_create do |subscriber|
+        subscriber.registration_id = @registation_id
+      end
       render json: subscriber, status: 200
-    else
+    rescue
       render json: subscriber.errors.full_messages.to_sentence, status: :unprocessable_entity
     end
   end
@@ -71,6 +71,12 @@ class NotificationsController < ApplicationController
 
   def most_recent
     render json: Notification.last
+  end
+
+
+  def  notify
+    recipients = Subscribers.pluck(:registration_id)
+    GcmPush.send(recipients)
   end
 
   private
